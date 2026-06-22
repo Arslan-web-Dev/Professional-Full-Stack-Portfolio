@@ -1,5 +1,6 @@
 import { createServerClient } from "@/lib/supabase-server";
 import type { Metadata } from "next";
+import BackgroundCanvas from "@/components/3d/BackgroundCanvas";
 
 export async function generateMetadata(): Promise<Metadata> {
   const supabase = createServerClient();
@@ -20,5 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function PortfolioLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <BackgroundCanvas />
+      {children}
+    </>
+  );
 }

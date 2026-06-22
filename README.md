@@ -105,7 +105,7 @@ The changes reflect instantly (hot‑reload) during development.
 
 ## 🌐 Live Demo & Screenshots
 
-- **Live Demo:** https://professional-full-stack-portfolio.vercel.app/
+- **Live Demo:** https://muhammadarslan.cv.vercel.app/
 - **Screenshots:**
   - ![Home](assets/home.png)
   - ![Project Card Hover](assets/card_hover.png)
@@ -137,9 +137,9 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 
 Feel free to reach out via:
 
-- **Email:** your.email@example.com
-- **LinkedIn:** https://linkedin.com/in/your‑profile
-- **Twitter:** https://twitter.com/your‑handle
+- **Email:** muhammadarslan.cs.web@gmail.com
+- **LinkedIn:** https://linkedin.com/in/muhammadarslan
+- **Twitter:** https://twitter.com/muhammadarslan
 
 ---
 ## 📚 Documentation

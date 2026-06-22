@@ -1,9 +1,14 @@
 "use client";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { Github, Phone, MapPin, ArrowDown, Sparkles } from "lucide-react";
 
 export default function Hero({ data }: { data: Record<string, string> | null }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -81,17 +86,19 @@ export default function Hero({ data }: { data: Record<string, string> | null }) 
         >
           <span className="text-[#475569]">I build</span>
           <span className="gradient-text font-semibold">
-            <TypeAnimation
-              sequence={[
-                "SaaS Platforms", 2000,
-                "AI-Powered Apps", 2000,
-                "Enterprise Systems", 2000,
-                "Scalable APIs", 2000,
-                "Modern Web Apps", 2000,
-              ]}
-              repeat={Infinity}
-              speed={50}
-            />
+            {mounted && (
+              <TypeAnimation
+                sequence={[
+                  "SaaS Platforms", 2000,
+                  "AI-Powered Apps", 2000,
+                  "Enterprise Systems", 2000,
+                  "Scalable APIs", 2000,
+                  "Modern Web Apps", 2000,
+                ]}
+                repeat={Infinity}
+                speed={50}
+              />
+            )}
           </span>
         </motion.div>
 

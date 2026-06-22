@@ -52,17 +52,24 @@ export default function Sidebar({ isOpen = false, setIsOpen = () => {} }: { isOp
 
   // Track active section on scroll
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const sections = ["hero", "about", "skills", "projects", "certificates", "collaborations", "contact"];
-      for (const section of sections.reverse()) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 200) {
-            setActiveSection(`#${section}`);
-            break;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const sections = ["contact", "collaborations", "certificates", "projects", "skills", "about", "hero"];
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 200) {
+                setActiveSection(`#${section}`);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });

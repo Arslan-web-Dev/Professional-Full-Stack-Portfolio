@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createServerClient } from "@/lib/supabase-server";
+import { NextResponse } from "next/server";
+import { createApiClient } from "@/lib/supabase-api";
 
 export async function GET() {
   try {
-    const supabase = createServerClient();
+    const supabase = createApiClient();
     const { data, error } = await supabase.from("skills").select("*").order("order_index");
     if (error) throw error;
     return NextResponse.json({ skills: data });
