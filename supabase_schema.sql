@@ -63,10 +63,12 @@ CREATE TABLE IF NOT EXISTS public.portfolio_meta (
 CREATE TABLE IF NOT EXISTS public.uploaded_files (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
-  url TEXT NOT NULL,
-  size INTEGER DEFAULT 0,
-  type TEXT NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+  file_url TEXT NOT NULL,
+  file_type TEXT NOT NULL,
+  size_kb INTEGER DEFAULT 0,
+  label TEXT,
+  show_in_sidebar BOOLEAN DEFAULT false,
+  uploaded_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
 -- 7. Create Nav Items Table (For Sidebar)
@@ -78,6 +80,21 @@ CREATE TABLE IF NOT EXISTS public.nav_items (
   order_index INTEGER DEFAULT 0,
   visible BOOLEAN DEFAULT true,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 8. Create SEO Settings Table
+CREATE TABLE IF NOT EXISTS public.seo_settings (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  page TEXT NOT NULL UNIQUE,
+  meta_title TEXT NOT NULL,
+  meta_description TEXT NOT NULL,
+  keywords TEXT[] DEFAULT '{}',
+  og_title TEXT,
+  og_description TEXT,
+  og_image TEXT,
+  twitter_card TEXT DEFAULT 'summary_large_image',
+  canonical_url TEXT,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
 
@@ -93,6 +110,7 @@ ALTER TABLE public.collaborations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.portfolio_meta ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.uploaded_files ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.nav_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.seo_settings ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access to all tables (Anyone can see your portfolio)
 CREATE POLICY "Allow public read access on projects" ON public.projects FOR SELECT USING (true);
@@ -102,6 +120,7 @@ CREATE POLICY "Allow public read access on collaborations" ON public.collaborati
 CREATE POLICY "Allow public read access on portfolio_meta" ON public.portfolio_meta FOR SELECT USING (true);
 CREATE POLICY "Allow public read access on uploaded_files" ON public.uploaded_files FOR SELECT USING (true);
 CREATE POLICY "Allow public read access on nav_items" ON public.nav_items FOR SELECT USING (true);
+CREATE POLICY "Allow public read access on seo_settings" ON public.seo_settings FOR SELECT USING (true);
 
 -- Allow authenticated users (Admin) to insert/update/delete
 -- Projects
@@ -118,6 +137,8 @@ CREATE POLICY "Allow admin all access on portfolio_meta" ON public.portfolio_met
 CREATE POLICY "Allow admin all access on uploaded_files" ON public.uploaded_files AS PERMISSIVE FOR ALL TO authenticated USING (true) WITH CHECK (true);
 -- Nav Items
 CREATE POLICY "Allow admin all access on nav_items" ON public.nav_items AS PERMISSIVE FOR ALL TO authenticated USING (true) WITH CHECK (true);
+-- SEO Settings
+CREATE POLICY "Allow admin all access on seo_settings" ON public.seo_settings AS PERMISSIVE FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
 -- ==========================================
 -- INSERT DEMO DATA FOR ALL TABLES

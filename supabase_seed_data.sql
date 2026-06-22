@@ -51,3 +51,9 @@ INSERT INTO public.collaborations (company, role, duration, description, logo_ur
 ('Tech Solutions Inc.', 'Frontend Developer Intern', 'June 2023 - Aug 2023', 'Developed responsive user interfaces for internal dashboards using React and Tailwind CSS. Improved overall site performance by 30% through code optimization and lazy loading.', null, 1),
 ('Freelance', 'Full Stack Developer', 'Sep 2023 - Present', 'Built multiple client projects including e-commerce stores, portfolio websites, and SaaS dashboards. Delivered 10+ projects with 5-star client satisfaction.', null, 2),
 ('COMSATS University Islamabad', 'BS Computer Science', '2021 - 2025', 'Final year student with focus on software engineering. Leading a team of 3 to develop an AI-based career counseling platform as Final Year Project.', null, 3);
+
+-- 7. SEO Settings
+INSERT INTO public.seo_settings (page, meta_title, meta_description, keywords, og_title, og_description, og_image, twitter_card, canonical_url) VALUES
+('home', 'Muhammad Arslan — Full Stack Developer', 'Professional Full Stack Developer Portfolio | Next.js, TypeScript, Supabase, Tailwind CSS', '{"Muhammad Arslan", "Full Stack Developer", "Next.js", "TypeScript", "Supabase", "COMSATS"}', 'Muhammad Arslan — Full Stack Developer', 'Professional Full Stack Developer Portfolio | Next.js, TypeScript, Supabase, Tailwind CSS', null, 'summary_large_image', 'https://arslandev.vercel.app')
+ON CONFLICT (page) DO NOTHING;
+
