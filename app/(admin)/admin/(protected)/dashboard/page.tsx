@@ -8,8 +8,8 @@ import {
 
 export default async function DashboardPage() {
   const supabase = createServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/admin/login");
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) redirect("/admin/login");
 
   const [projects, skills, certs, files, collabs] = await Promise.all([
     supabase.from("projects").select("id", { count: "exact" }),

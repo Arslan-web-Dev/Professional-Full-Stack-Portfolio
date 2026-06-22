@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Mail, Phone, MapPin, Github, Linkedin, Twitter, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
@@ -9,27 +9,8 @@ export default function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-
   const handleSubmit = async () => {
     if (!form.name || !form.email || !form.message) return;
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email)) {
-      setStatus("error");
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(() => setStatus("idle"), 5000);
-      return;
-    }
-
     setStatus("sending");
     try {
       const res = await fetch("/api/contact", {
@@ -45,9 +26,7 @@ export default function Contact() {
     } catch {
       setStatus("error");
     }
-
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setStatus("idle"), 5000);
+    setTimeout(() => setStatus("idle"), 5000);
   };
 
   const contacts = [
@@ -156,30 +135,27 @@ export default function Contact() {
               Send a Message
             </h3>
 
-            <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="space-y-5">
+            <div className="space-y-5">
               {[
                 { name: "name", label: "Your Name", type: "text", placeholder: "John Doe" },
                 { name: "email", label: "Email Address", type: "email", placeholder: "john@example.com" },
               ].map((field) => (
                 <div key={field.name} className="relative">
-                  <label 
-                    htmlFor={field.name}
-                    className={`block text-xs uppercase tracking-wider mb-2 transition-colors duration-300 font-medium
-                      ${focusedField === field.name ? "text-[#6366f1]" : "text-[#475569]"}`}>
+                  <label className={`block text-xs uppercase tracking-wider mb-2 transition-colors duration-300 font-medium
+                    ${focusedField === field.name ? "text-[#6366f1]" : "text-[#475569]"}`}>
                     {field.label}
                   </label>
                   <div className="relative">
                     <input
-                      id={field.name}
                       type={field.type}
                       value={form[field.name as "name" | "email"]}
                       onChange={(e) => setForm({ ...form, [field.name]: e.target.value })}
                       onFocus={() => setFocusedField(field.name)}
                       onBlur={() => setFocusedField(null)}
-                      className={`w-full bg-[#02040a]/80 border rounded-xl p-4
+                      className="w-full bg-[#02040a]/80 border rounded-xl p-4
                                  text-white text-sm focus:outline-none transition-all duration-300
                                  placeholder:text-[#334155]
-                                 ${focusedField === field.name ? 'border-[#6366f1]/50 shadow-[0_0_20px_rgba(99,102,241,0.1)]' : 'border-[#6366f1]/15 hover:border-[#6366f1]/30'}`}
+                                 ${focusedField === field.name ? 'border-[#6366f1]/50 shadow-[0_0_20px_rgba(99,102,241,0.1)]' : 'border-[#6366f1]/15 hover:border-[#6366f1]/30'}"
                       placeholder={field.placeholder}
                     />
                     {focusedField === field.name && (
@@ -193,29 +169,26 @@ export default function Contact() {
               ))}
 
               <div className="relative">
-                <label 
-                  htmlFor="message"
-                  className={`block text-xs uppercase tracking-wider mb-2 transition-colors duration-300 font-medium
-                    ${focusedField === "message" ? "text-[#6366f1]" : "text-[#475569]"}`}>
+                <label className={`block text-xs uppercase tracking-wider mb-2 transition-colors duration-300 font-medium
+                  ${focusedField === "message" ? "text-[#6366f1]" : "text-[#475569]"}`}>
                   Message
                 </label>
                 <textarea
-                  id="message"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   onFocus={() => setFocusedField("message")}
                   onBlur={() => setFocusedField(null)}
                   rows={5}
-                  className={`w-full bg-[#02040a]/80 border rounded-xl p-4
+                  className="w-full bg-[#02040a]/80 border rounded-xl p-4
                              text-white text-sm focus:outline-none transition-all duration-300 resize-none
                              placeholder:text-[#334155]
-                             ${focusedField === 'message' ? 'border-[#6366f1]/50 shadow-[0_0_20px_rgba(99,102,241,0.1)]' : 'border-[#6366f1]/15 hover:border-[#6366f1]/30'}`}
+                             ${focusedField === 'message' ? 'border-[#6366f1]/50 shadow-[0_0_20px_rgba(99,102,241,0.1)]' : 'border-[#6366f1]/15 hover:border-[#6366f1]/30'}"
                   placeholder="Tell me about your project..."
                 />
               </div>
 
               <motion.button
-                type="submit"
+                onClick={handleSubmit}
                 disabled={status === "sending"}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -252,7 +225,7 @@ export default function Contact() {
                   </AnimatePresence>
                 </span>
               </motion.button>
-            </form>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -274,7 +247,7 @@ export default function Contact() {
             Designed & Built by <span className="text-[#6366f1] font-semibold">Muhammad Arslan</span>
           </p>
           <p className="text-[#334155] text-xs">
-            COMSATS University Islamabad • {mounted ? new Date().getFullYear() : ""}
+            COMSATS University Islamabad • {new Date().getFullYear()}
           </p>
         </motion.div>
       </div>

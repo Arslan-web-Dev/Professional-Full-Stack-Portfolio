@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Star, ArrowUpRight } from "lucide-react";
-import Image from "next/image";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import type { Project } from "@/types";
 
@@ -18,12 +17,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       {/* Image area */}
       <div className="relative h-52 overflow-hidden bg-gradient-to-br from-[#0f172a] to-[#1e1b4b]">
         {project.image_url ? (
-          <Image 
+          <img 
             src={project.image_url} 
             alt={project.title} 
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+            loading="lazy"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">

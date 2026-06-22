@@ -125,8 +125,8 @@ export default function BackgroundCanvas() {
     // Grid floor
     const gridHelper = new THREE.GridHelper(40, 40, 0x6366f1, 0x1e1b4b);
     gridHelper.position.y = -8;
-    (gridHelper.material as THREE.Material).opacity = 0.08;
-    (gridHelper.material as THREE.Material).transparent = true;
+    gridHelper.material.opacity = 0.08;
+    gridHelper.material.transparent = true;
     scene.add(gridHelper);
 
     camera.position.z = 8;
@@ -193,49 +193,6 @@ export default function BackgroundCanvas() {
       cancelAnimationFrame(animId);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
-
-      // Dispose particle layers
-      [layer1, layer2, layer3].forEach(layer => {
-        layer.geometry.dispose();
-        if (Array.isArray(layer.material)) {
-          layer.material.forEach(m => m.dispose());
-        } else {
-          layer.material.dispose();
-        }
-      });
-
-      // Dispose shapes
-      shapes.forEach(mesh => {
-        mesh.geometry.dispose();
-        if (Array.isArray(mesh.material)) {
-          mesh.material.forEach(m => m.dispose());
-        } else {
-          mesh.material.dispose();
-        }
-      });
-
-      // Dispose shared geometries
-      geometries.forEach(geo => geo.dispose());
-
-      // Dispose aurora tubes
-      auroraGroup.children.forEach(child => {
-        const mesh = child as THREE.Mesh;
-        mesh.geometry.dispose();
-        if (Array.isArray(mesh.material)) {
-          mesh.material.forEach(m => m.dispose());
-        } else {
-          mesh.material.dispose();
-        }
-      });
-
-      // Dispose grid helper
-      gridHelper.geometry.dispose();
-      if (Array.isArray(gridHelper.material)) {
-        gridHelper.material.forEach(m => m.dispose());
-      } else {
-        gridHelper.material.dispose();
-      }
-
       renderer.dispose();
       if (mountRef.current?.contains(renderer.domElement)) {
         mountRef.current.removeChild(renderer.domElement);

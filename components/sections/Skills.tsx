@@ -32,7 +32,7 @@ function CircularProgress({ skill, index }: { skill: Skill; index: number }) {
           <motion.circle
             cx="40" cy="40" r="36"
             fill="none"
-            stroke={`url(#gradient-${skill.id})`}
+            stroke="url(#gradient)"
             strokeWidth="6"
             strokeLinecap="round"
             strokeDasharray={circumference}
@@ -42,7 +42,7 @@ function CircularProgress({ skill, index }: { skill: Skill; index: number }) {
             style={{ filter: "drop-shadow(0 0 6px rgba(99, 102, 241, 0.5))" }}
           />
           <defs>
-            <linearGradient id={`gradient-${skill.id}`} x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#6366f1" />
               <stop offset="100%" stopColor="#06b6d4" />
             </linearGradient>
