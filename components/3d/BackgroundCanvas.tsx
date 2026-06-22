@@ -169,7 +169,8 @@ export default function BackgroundCanvas() {
       // Aurora wave
       auroraGroup.rotation.z = t * 0.02;
       auroraGroup.children.forEach((child, i) => {
-        (child as THREE.Mesh).material.opacity = 0.04 + Math.sin(t * 0.5 + i) * 0.02;
+        const meshMaterial = (child as THREE.Mesh).material as THREE.MeshBasicMaterial;
+        meshMaterial.opacity = 0.04 + Math.sin(t * 0.5 + i) * 0.02;
       });
 
       // Camera parallax

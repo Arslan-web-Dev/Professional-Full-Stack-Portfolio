@@ -1,4 +1,6 @@
 {
+  "name": "muhammadarslan.cv",
+
   "framework": "nextjs",
   "buildCommand": "next build",
   "devCommand": "next dev",

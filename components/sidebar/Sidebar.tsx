@@ -29,19 +29,25 @@ export default function Sidebar({ isOpen = false, setIsOpen = () => {} }: { isOp
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
 
   useEffect(() => {
-    const supabase = createClient();
-    supabase.from("nav_items").select("*").eq("visible", true).order("order_index")
-      .then(({ data }) => {
-        if (data && data.length > 0) {
-          setNavItems(data);
-        } else {
+    (async () => {
+      const supabase = createClient();
+      try {
+        const { data: navData, error: navError } = await supabase.from("nav_items").select("*").eq("visible", true).order("order_index");
+        if (navError || !navData || navData.length === 0) {
           setNavItems(DEFAULT_NAV_ITEMS);
+        } else {
+          setNavItems(navData);
         }
-      })
-      .catch(() => setNavItems(DEFAULT_NAV_ITEMS));
-      
-    supabase.from("uploaded_files").select("*").eq("show_in_sidebar", true).order("uploaded_at", { ascending: false })
-      .then(({ data }) => data && setUploadedFiles(data));
+
+        const { data: fileData, error: fileError } = await supabase.from("uploaded_files").select("*").eq("show_in_sidebar", true).order("uploaded_at", { ascending: false });
+        if (!fileError && fileData) {
+          setUploadedFiles(fileData);
+        }
+      } catch (err) {
+        console.error("Error fetching sidebar data:", err);
+        setNavItems(DEFAULT_NAV_ITEMS);
+      }
+    })();
   }, []);
 
   // Track active section on scroll
