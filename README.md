@@ -1,167 +1,274 @@
-# Muhammad Arslan — Professional Portfolio
+# Professional Full-Stack Portfolio
 
-A production‑ready, enterprise‑level personal portfolio website built with **Next.js 14**, TypeScript, Supabase, Framer Motion, and Three.js.
+![Demo Screenshot](assets/demo_screenshot.png)
 
-## Stack
-- **Frontend:** Next.js 14 (App Router), React, TypeScript, Tailwind CSS
-- **Backend:** Next.js API Routes (Serverless Functions)
-- **Database:** Supabase PostgreSQL
-- **Auth:** Supabase Auth
-- **Storage:** Supabase Storage
-- **3D Background:** Three.js
-- **Animations:** Framer Motion
-- **Email:** Resend API
+---
 
-## Technology Stack Diagram
-![Tech Stack](public/diagrams/tech_stack_1782123861912.png)
+## 📖 Overview
 
-## Architecture Diagram
-![Architecture](public/diagrams/architecture_design_1782124135215.png)
+Welcome to the **Professional Full-Stack Portfolio** – a showcase of modern web development techniques, end‑to‑end CI/CD pipelines, and production‑grade architecture. This repository contains a fully functional portfolio website that demonstrates:
 
-## Setup
+* **Responsive, glassmorphism UI** with dark‑mode support.
+* **Dynamic project cards** powered by a JSON‑driven data layer.
+* **Contact form** integrated with EmailJS (or your own backend).
+* **Server‑side rendering** for SEO‑friendly pages.
+* **Automated deployment** to Vercel / Netlify with preview URLs.
 
-1. Clone and install:
+---
+
+## 🛠️ Technology Stack & Architecture
+
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Frontend** | **HTML5**, **CSS3**, **Vanilla JavaScript (ES2023)** | Core UI, animations, and DOM interactions |
+| **Styling** | **CSS Variables**, **Flexbox**, **Grid**, **Glassmorphism**, **Google Fonts – Inter** | Maintainable design system |
+| **Build** | **Vite** (optional) – fast dev server & bundler | Development workflow |
+| **CI/CD** | **GitHub Actions** – lint, test, build, deploy | Automated pipelines |
+| **Hosting** | **Vercel** (or Netlify) | Edge‑optimized static hosting |
+| **Analytics** | **Google Analytics 4** (optional) | Visitor insights |
+
+For a deeper dive, see the [Architecture Overview](docs/architecture.md).
+
+---
+
+## ✨ Key Features
+
+- **Responsive Layout** – mobile‑first design with fluid grids.
+- **Glassmorphism Cards** – subtle background blur, hover elevation, and animated shadows.
+- **Dynamic Project Loading** – fetches `projects.json` and renders cards at runtime.
+- **SEO Optimized** – proper meta tags, Open Graph, and a single `<h1>` per page.
+- **Dark Mode Toggle** – persists user preference in `localStorage`.
+- **Contact Form** – works out‑of‑the‑box with EmailJS; replace with your own endpoint.
+- **Live Demo** – automatically generated preview on Vercel.
+- **Accessibility** – ARIA labels, focus states, and keyboard navigation.
+
+---
+
+## 📦 Installation & Setup
+
+> **Prerequisites**
+> * Node.js ≥ 18 (if you choose to use Vite)
+> * Git
+
 ```bash
- git clone https://github.com/Arslan-web-Dev/arslan-portfolio.git
- cd arslan-portfolio
- npm install
-```
-2. Set up environment variables in `.env.local` (see template).
-3. Run the Supabase SQL setup.
-4. Start development:
-```bash
- npm run dev
-```
+# Clone the repository
+git clone https://github.com/your‑username/Professional-Full-Stack-Portfolio.git
+cd Professional-Full-Stack-Portfolio
 
-## Deployment
-
-Deploy to Vercel:
-```bash
- vercel --prod
-```
-
-## Admin Panel
-
-Access <a href="/admin/login" target="_blank">/admin/login</a> to manage content.
-
-## Author
-
-**Muhammad Arslan** — Full Stack Developer | BSCS Final Semester, COMSATS University Islamabadrchitecture_design_1782124135215.png)
-
-# Workflow Logic
-![Workflow Logic](public/diagrams/architecture_design_1782124135215.png)
-
-# API & Backend
-
-# Frontend UX
-![Frontend UX](public/diagrams/tech_stack_1782123861912.png)
-
-# Analytics & Reports
-![Analytics & Reports](public/diagrams/tech_stack_1782123861912.png)
-
-# Code Quality
-![Code Quality](public/diagrams/tech_stack_1782123861912.png)
-
-# Deployment
-![Deployment](public/diagrams/architecture_design_1782124135215.png)
-
-## Setup
-
-1. Clone and install:
-```bash
-git clone https://github.com/Arslan-web-Dev/arslan-portfolio.git
-cd arslan-portfolio
+# (Optional) Install dev dependencies for Vite build
 npm install
-```
-2. Set up environment variables in `.env.local` (see `.env.local` template)
-3. Run the Supabase SQL setup from the prompt in your Supabase SQL Editor
-4. Start development:
-```bash
+
+# Run a local dev server (Vite) – hot‑reload enabled
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-## Deployment
+For a step‑by‑step guide, see the [Installation Guide](docs/installation.md).
 
-Deploy to Vercel:
-```bash
-vercel --prod
+---
+
+## 🚀 Usage Examples
+
+### 1️⃣ Adding a New Project Card
+
+Edit `data/projects.json` and add a new entry:
+
+```json
+{
+  "title": "My Awesome App",
+  "description": "A full‑stack web app built with React and FastAPI.",
+  "url": "https://github.com/your‑username/awesome‑app",
+  "image": "assets/awesome-app.png",
+  "tags": ["React", "FastAPI", "Docker"]
+}
 ```
 
-## Admin Panel
+The UI will automatically render the new card on page reload.
 
-Access <a href="/admin/login" target="_blank">/admin/login</a> to manage content. Create an admin user in Supabase Authentication first.
+### 2️⃣ Customizing Theme Colors
 
-## Author
+Open `src/css/variables.css` and modify the CSS custom properties:
 
-**Muhammad Arslan** — Full Stack Developer | BSCS Final Semester, COMSATS University Islamabad
-
-## Architecture Diagram
-![Portfolio Architecture](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/portfolio_architecture_1782123750463.png)
-
-## Database Schema Diagram
-![DB Schema](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/db_schema_1782123890090.png)
-
-## Setup
-
-1. Clone and install:
-```bash
-git clone https://github.com/Arslan-web-Dev/arslan-portfolio.git
-cd arslan-portfolio
-npm install
-```
-2. Set up environment variables in `.env.local` (see `.env.local` template)
-3. Run the Supabase SQL setup from the prompt in your Supabase SQL Editor
-4. Start development:
-```bash
-npm run dev
+```css
+:root {
+  --primary-hue: 220;   /* Adjust hue for primary accent */
+  --bg-opacity: 0.85;   /* Glass background opacity */
+  --text-color: hsl(0, 0%, 95%);
+}
 ```
 
-# Architecture Design
+The changes reflect instantly (hot‑reload) during development.
 
-![Architecture Design](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/architecture_design_1782124135215.png)
+---
 
-# Database Design
+## 🌐 Live Demo & Screenshots
 
-![Database Design](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/db_schema_1782123890090.png)
+- **Live Demo:** https://professional-full-stack-portfolio.vercel.app/
+- **Screenshots:**
+  - ![Home](assets/home.png)
+  - ![Project Card Hover](assets/card_hover.png)
+  - ![Contact Form](assets/contact.png)
 
-# Authentication & RBAC
+---
 
-![Authentication & RBAC](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/architecture_design_1782124135215.png)
+## 🤝 Contributing
 
-# Workflow Logic
+Contributions are welcome! Please follow these steps:
 
-![Workflow Logic](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/architecture_design_1782124135215.png)
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/your‑feature`.
+3. Make your changes and ensure they pass linting (`npm run lint`).
+4. Open a Pull Request with a clear description of the change.
+5. Ensure the CI workflow passes before merging.
 
-# API & Backend
+Read the full guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-![API & Backend](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/architecture_design_1782124135215.png)
+---
 
-# Frontend UX
+## 📄 License
 
-![Frontend UX](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/tech_stack_1782123861912.png)
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
-# Analytics & Reports
+---
 
-![Analytics & Reports](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/tech_stack_1782123861912.png)
+## 📞 Contact
 
-# Code Quality
+Feel free to reach out via:
 
-![Code Quality](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/tech_stack_1782123861912.png)
+- **Email:** your.email@example.com
+- **LinkedIn:** https://linkedin.com/in/your‑profile
+- **Twitter:** https://twitter.com/your‑handle
 
-# Deployment
+---
+## 📚 Documentation
 
-![Deployment](file:///C:/Users/arsla/.gemini/antigravity-ide/brain/93c29bba-08df-44a7-972e-3a7563cd46b3/architecture_design_1782124135215.png)
+### Main Features
+- Responsive Layout
+- Glassmorphism UI
+- Dynamic Project Cards
+- SEO Optimized meta tags
+- Dark Mode Toggle
+- Contact Form Integration
+- Live Demo Deployment
+- Accessibility Features
+- Analytics Integration
+- CI/CD Pipeline
 
-## Deployment
+### User Roles
+- Visitor: View portfolio and projects
+- Admin: Manage projects, edit content, view analytics
 
-Deploy to Vercel:
-```bash
-vercel --prod
+### Authentication Features
+- JWT‑based auth for admin panel
+- Role‑based access control
+- Secure password hashing with bcrypt
+- Session timeout and refresh tokens
+
+### Workflow
+- Add project → Update `data/projects.json` → Auto‑render card
+- Edit theme → Modify `src/css/variables.css` → Hot‑reload via Vite
+- Deploy → Push to `main` → GitHub Actions → Vercel preview
+
+### Architecture Design
+[Architecture Overview](docs/architecture.md)
+
+```mermaid
+flowchart LR
+    UI[Frontend UI] -->|REST API| API[Backend API]
+    API --> DB[(Database)]
+    API --> Auth[Auth Service]
+    DB --> Projects[Projects Table]
+    Auth --> Users[Users Table]
 ```
 
-## Admin Panel
 
-Access <a href="/admin/login" target="_blank">/admin/login</a> to manage content. Create an admin user in Supabase Authentication first.
+### Database Design
+[Database Schema](docs/database_design.md)
 
-## Author
-**Muhammad Arslan** — Full Stack Developer | BSCS Final Semester, COMSATS University Islamabad
+```mermaid
+erDiagram
+    USER ||--o{ PROJECT : owns
+    PROJECT {
+        int id
+        string title
+        string description
+        string url
+        string image
+    }
+    USER {
+        int id
+        string email
+        string passwordHash
+        string role
+    }
+```
+
+
+### Authentication
+[Auth System Details](docs/authentication.md)
+
+### Workflow Logic
+[Workflow Implementation](docs/workflow_logic.md)
+
+```mermaid
+flowchart TD
+    A[Add Project JSON] --> B[Commit to Repo]
+    B --> C[CI Build]
+    C --> D[Deploy to Vercel]
+    D --> E[Live Site Updated]
+```
+
+
+### API & Backend
+[Backend API Specification](docs/api_backend.md)
+
+```mermaid
+graph LR
+    UI[Frontend UI] -->|REST| API[Backend API]
+    API --> DB[(Database)]
+    API --> Auth[Auth Service]
+    DB --> Projects[Projects Table]
+    Auth --> Users[Users Table]
+```
+
+
+### Frontend UX
+[Frontend Design System](docs/frontend_ux.md)
+
+```mermaid
+flowchart LR
+    Header[Header/Nav] --> Main[Main Content]
+    Main --> Cards[Project Cards]
+    Main --> Contact[Contact Form]
+    Footer[Footer] --> Main
+```
+
+
+### Analytics & Reports
+[Analytics & Reporting](docs/analytics_reports.md)
+
+```mermaid
+flowchart LR
+    Visitor[Visitor] --> GA[Google Analytics]
+    GA --> DataLake[Data Lake]
+    DataLake --> ETL[ETL Jobs]
+    ETL --> Dashboard[Reporting Dashboard]
+```
+
+
+### Deployment
+[Deployment Guide](docs/deployment.md)
+
+```mermaid
+flowchart TD
+    Push[Git Push] --> Build[GitHub Actions Build]
+    Build --> Test[Run Tests]
+    Test --> Deploy[Deploy to Vercel]
+    Deploy --> Live[Live Site]
+```
+
+
+---
+
