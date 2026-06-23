@@ -6,9 +6,9 @@ export default function About({ data }: { data: Record<string, string> | null })
   const info = [
     { icon: GraduationCap, label: "University", value: data?.university || "COMSATS University Islamabad" },
     { icon: Briefcase,    label: "Internship",  value: data?.internship  || "Full Stack Developer Intern" },
-    { icon: MapPin,        label: "Location",    value: data?.location    || "Islamabad, Pakistan" },
-    { icon: Phone,         label: "Phone",       value: data?.phone       || "+92 327 5541708" },
-    { icon: Github,        label: "GitHub",      value: data?.github      || "Arslan-web-Dev" },
+    { icon: MapPin,        label: "Location",    value: data?.location    || "Islamabad, Pakistan", href: "https://maps.google.com/?q=Islamabad,+Pakistan" },
+    { icon: Phone,         label: "Phone",       value: data?.phone       || "+92 327 5541708", href: "https://wa.me/923275541708" },
+    { icon: Github,        label: "GitHub",      value: data?.github      || "Arslan-web-Dev", href: "https://github.com/Arslan-web-Dev" },
   ];
 
   const stats = [
@@ -111,26 +111,37 @@ export default function About({ data }: { data: Record<string, string> | null })
               Quick Info
             </h3>
 
-            {info.map(({ icon: Icon, label, value }, i) => (
-              <motion.div 
-                key={label}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ x: 4, borderColor: "rgba(99, 102, 241, 0.3)" }}
-                className="flex items-center gap-4 p-5 rounded-xl glass-card-hover transition-all duration-300"
-              >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1]/20 to-[#06b6d4]/20 
-                                flex items-center justify-center flex-shrink-0 border border-[#6366f1]/10">
-                  <Icon size={18} className="text-[#6366f1]" />
+            {info.map(({ icon: Icon, label, value, href }, i) => {
+              const cardContent = (
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ x: 4 }}
+                  className={`flex items-center gap-4 p-5 rounded-xl glass-card-hover transition-all duration-300 ${href ? "cursor-pointer group" : ""}`}
+                >
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#6366f1]/20 to-[#06b6d4]/20 
+                                  flex items-center justify-center flex-shrink-0 border border-[#6366f1]/10">
+                    <Icon size={18} className="text-[#6366f1]" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-[#475569] uppercase tracking-[0.2em] font-medium mb-1">{label}</p>
+                    <p className={`text-white text-sm font-semibold transition-colors ${href ? "group-hover:text-[#6366f1]" : ""}`}>{value}</p>
+                  </div>
+                </motion.div>
+              );
+
+              return href ? (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="block">
+                  {cardContent}
+                </a>
+              ) : (
+                <div key={label} className="block">
+                  {cardContent}
                 </div>
-                <div>
-                  <p className="text-[10px] text-[#475569] uppercase tracking-[0.2em] font-medium mb-1">{label}</p>
-                  <p className="text-white text-sm font-semibold">{value}</p>
-                </div>
-              </motion.div>
-            ))}
+              );
+            })}
 
             {/* Tech tags */}
             <div className="pt-6">
