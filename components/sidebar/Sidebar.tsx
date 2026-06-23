@@ -86,14 +86,42 @@ export default function Sidebar({ isOpen = false, setIsOpen = () => {} }: { isOp
         style={{ boxShadow: isOpen ? "0 0 60px rgba(99, 102, 241, 0.1)" : "none" }}
       >
         {/* Logo / Toggle */}
-        <div className="flex items-center gap-3 px-4 py-6 border-b border-[#6366f1]/10">
+        <div className={`relative flex flex-col items-center border-b border-[#6366f1]/10 transition-all duration-500
+                         ${isOpen ? "px-4 py-8 gap-4" : "px-3 py-6 justify-center"}`}>
+          
+          {/* Close/Toggle Button when open */}
+          {isOpen && (
+            <motion.button
+              onClick={() => setIsOpen(false)}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="absolute top-4 right-4 w-8 h-8 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20
+                         flex items-center justify-center text-[#6366f1]
+                         hover:bg-[#6366f1]/20 hover:border-[#6366f1]/40 
+                         transition-all duration-300"
+            >
+              <X size={14} />
+            </motion.button>
+          )}
+
+          {/* Profile Picture */}
           <motion.div
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            layout
+            animate={{ 
+              width: isOpen ? 80 : 42, 
+              height: isOpen ? 80 : 42,
+              y: [0, -4, 0]
+            }}
+            transition={{ 
+              layout: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+              y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+            }}
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-10 h-10 rounded-full cursor-pointer flex-shrink-0
-                       bg-gradient-to-br from-[#6366f1] to-[#06b6d4] p-[1.5px]
-                       shadow-[0_0_15px_rgba(99,102,241,0.3)]"
+            className="relative rounded-full cursor-pointer flex-shrink-0
+                       bg-gradient-to-br from-[#6366f1] to-[#06b6d4] p-[2px]
+                       shadow-[0_0_20px_rgba(99,102,241,0.4)]"
           >
             <div className="w-full h-full rounded-full overflow-hidden bg-black/50">
               <img
@@ -104,30 +132,23 @@ export default function Sidebar({ isOpen = false, setIsOpen = () => {} }: { isOp
             </div>
           </motion.div>
 
+          {/* Name Info when open */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="flex items-center justify-between flex-1 min-w-0"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="text-center"
               >
-                <span className="text-sm font-semibold text-white truncate"
-                      style={{ fontFamily: "Outfit, sans-serif" }}>
-                  Arslan
-                </span>
-                <motion.button
-                  onClick={() => setIsOpen(false)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-8 h-8 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20
-                             flex items-center justify-center text-[#6366f1]
-                             hover:bg-[#6366f1]/20 hover:border-[#6366f1]/40 
-                             transition-all duration-300 flex-shrink-0"
-                >
-                  <X size={14} />
-                </motion.button>
+                <h2 className="text-base font-bold text-white tracking-wide"
+                    style={{ fontFamily: "Outfit, sans-serif" }}>
+                  Muhammad Arslan
+                </h2>
+                <p className="text-[10px] text-[#6366f1] font-semibold uppercase tracking-widest mt-1">
+                  Full Stack Developer
+                </p>
               </motion.div>
             )}
           </AnimatePresence>

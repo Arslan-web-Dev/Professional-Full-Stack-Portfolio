@@ -45,7 +45,7 @@ export default function Hero({ data }: { data: Record<string, string> | null }) 
         {/* Avatar */}
         <motion.div
           variants={itemVariants}
-          className="relative w-36 h-36 mx-auto mb-10"
+          className="relative w-48 h-48 mx-auto mb-10"
         >
           {/* Glow rings */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#6366f1] to-[#06b6d4] opacity-20 blur-xl animate-pulse" />
