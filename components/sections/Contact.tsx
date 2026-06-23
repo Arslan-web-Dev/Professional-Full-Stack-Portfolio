@@ -18,27 +18,35 @@ export default function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+
+      // Open mail client with prefilled fields to send directly to Muhammad Arslan
+      const mailtoUrl = `mailto:muhammadarslan.cs.web@gmail.com?subject=Portfolio Message from ${encodeURIComponent(form.name)}&body=Name: ${encodeURIComponent(form.name)}%0D%0AEmail: ${encodeURIComponent(form.email)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(form.message)}`;
+      window.location.href = mailtoUrl;
+
       if (res.ok) { 
         setStatus("success"); 
         setForm({ name: "", email: "", message: "" }); 
+      } else {
+        setStatus("success");
       }
-      else setStatus("error");
     } catch {
-      setStatus("error");
+      const mailtoUrl = `mailto:muhammadarslan.cs.web@gmail.com?subject=Portfolio Message from ${encodeURIComponent(form.name)}&body=Name: ${encodeURIComponent(form.name)}%0D%0AEmail: ${encodeURIComponent(form.email)}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(form.message)}`;
+      window.location.href = mailtoUrl;
+      setStatus("success");
     }
     setTimeout(() => setStatus("idle"), 5000);
   };
 
   const contacts = [
-    { icon: Mail,   label: "Email",    value: "muhammadarslan.cs.web@gmail.com", href: "mailto:arslan@example.com" },
-    { icon: Phone,  label: "Phone",    value: "+92 327 5541708", href: "tel:+923275541708" },
-    { icon: MapPin, label: "Location", value: "Islamabad, Pakistan" },
+    { icon: Mail,   label: "Email",    value: "muhammadarslan.cs.web@gmail.com", href: "mailto:muhammadarslan.cs.web@gmail.com" },
+    { icon: Phone,  label: "Phone",    value: "+92 327 5541708", href: "https://wa.me/923275541708" },
+    { icon: MapPin, label: "Location", value: "Islamabad, Pakistan", href: "https://maps.google.com/?q=Islamabad,+Pakistan" },
   ];
 
   const socials = [
     { icon: Github,    label: "GitHub",   href: "https://github.com/Arslan-web-Dev", color: "#6366f1" },
-    { icon: Linkedin,  label: "LinkedIn", href: "#", color: "#06b6d4" },
-    { icon: Twitter,   label: "Twitter",  href: "#", color: "#8b5cf6" },
+    { icon: Linkedin,  label: "LinkedIn", href: "https://www.linkedin.com/in/muhammad-arslan-92b070389/", color: "#06b6d4" },
+    { icon: Twitter,   label: "Twitter",  href: "https://x.com/", color: "#8b5cf6" },
   ];
 
   return (
@@ -69,31 +77,34 @@ export default function Contact() {
             {/* Contact info cards */}
             <div className="space-y-4 mb-10">
               {contacts.map(({ icon: Icon, label, value, href }, i) => (
-                <motion.div
+                <a
                   key={label}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ x: 4 }}
-                  className="flex items-center gap-5 p-5 rounded-xl glass-card-hover group cursor-pointer"
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="block"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366f1]/20 to-[#06b6d4]/20 
-                                  flex items-center justify-center flex-shrink-0 border border-[#6366f1]/10
-                                  group-hover:border-[#6366f1]/30 transition-colors">
-                    <Icon size={20} className="text-[#6366f1]" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-[#475569] uppercase tracking-[0.2em] font-medium mb-1">{label}</p>
-                    {href ? (
-                      <a href={href} className="text-white text-sm font-semibold hover:text-[#6366f1] transition-colors">
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-5 p-5 rounded-xl glass-card-hover group cursor-pointer"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#6366f1]/20 to-[#06b6d4]/20 
+                                    flex items-center justify-center flex-shrink-0 border border-[#6366f1]/10
+                                    group-hover:border-[#6366f1]/30 transition-colors">
+                      <Icon size={20} className="text-[#6366f1]" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-[#475569] uppercase tracking-[0.2em] font-medium mb-1">{label}</p>
+                      <span className="text-white text-sm font-semibold group-hover:text-[#6366f1] transition-colors">
                         {value}
-                      </a>
-                    ) : (
-                      <p className="text-white text-sm font-semibold">{value}</p>
-                    )}
-                  </div>
-                </motion.div>
+                      </span>
+                    </div>
+                  </motion.div>
+                </a>
               ))}
             </div>
 

@@ -86,7 +86,24 @@ export default function Sidebar({ isOpen = false, setIsOpen = () => {} }: { isOp
         style={{ boxShadow: isOpen ? "0 0 60px rgba(99, 102, 241, 0.1)" : "none" }}
       >
         {/* Logo / Toggle */}
-        <div className="flex items-center justify-between px-4 py-6 border-b border-[#6366f1]/10">
+        <div className="flex items-center gap-3 px-4 py-6 border-b border-[#6366f1]/10">
+          <motion.div
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            onClick={() => setIsOpen(!isOpen)}
+            className="relative w-10 h-10 rounded-full cursor-pointer flex-shrink-0
+                       bg-gradient-to-br from-[#6366f1] to-[#06b6d4] p-[1.5px]
+                       shadow-[0_0_15px_rgba(99,102,241,0.3)]"
+          >
+            <div className="w-full h-full rounded-full overflow-hidden bg-black/50">
+              <img
+                src="/profile.png"
+                alt="Arslan"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -94,33 +111,40 @@ export default function Sidebar({ isOpen = false, setIsOpen = () => {} }: { isOp
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
-                className="flex items-center gap-3"
+                className="flex items-center justify-between flex-1 min-w-0"
               >
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#6366f1] to-[#06b6d4] 
-                                flex items-center justify-center text-white font-bold text-sm"
-                     style={{ fontFamily: "Outfit, sans-serif" }}>
-                  MA
-                </div>
                 <span className="text-sm font-semibold text-white truncate"
                       style={{ fontFamily: "Outfit, sans-serif" }}>
                   Arslan
                 </span>
+                <motion.button
+                  onClick={() => setIsOpen(false)}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-8 h-8 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20
+                             flex items-center justify-center text-[#6366f1]
+                             hover:bg-[#6366f1]/20 hover:border-[#6366f1]/40 
+                             transition-all duration-300 flex-shrink-0"
+                >
+                  <X size={14} />
+                </motion.button>
               </motion.div>
             )}
           </AnimatePresence>
-          <motion.button
-            onClick={() => setIsOpen(!isOpen)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-9 h-9 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20
-                       flex items-center justify-center text-[#6366f1]
-                       hover:bg-[#6366f1]/20 hover:border-[#6366f1]/40 
-                       transition-all duration-300 flex-shrink-0 ml-auto"
-          >
-            <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
-              {isOpen ? <X size={15} /> : <Menu size={15} />}
-            </motion.div>
-          </motion.button>
+
+          {!isOpen && (
+            <motion.button
+              onClick={() => setIsOpen(true)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="absolute left-1/2 -translate-x-1/2 bottom-6 w-9 h-9 rounded-xl bg-[#6366f1]/10 border border-[#6366f1]/20
+                         flex items-center justify-center text-[#6366f1]
+                         hover:bg-[#6366f1]/20 hover:border-[#6366f1]/40 
+                         transition-all duration-300 md:hidden"
+            >
+              <Menu size={15} />
+            </motion.button>
+          )}
         </div>
 
         {/* Navigation */}

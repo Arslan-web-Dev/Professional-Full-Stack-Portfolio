@@ -52,15 +52,17 @@ export default function Hero({ data }: { data: Record<string, string> | null }) 
           <div className="absolute -inset-2 rounded-full border border-[#6366f1]/20 animate-ping" style={{ animationDuration: "3s" }} />
 
           <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             whileHover={{ scale: 1.05, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="relative w-full h-full rounded-full
-                       bg-gradient-to-br from-[#6366f1] via-[#8b5cf6] to-[#06b6d4]
-                       flex items-center justify-center text-5xl font-bold text-white
-                       shadow-[0_0_80px_rgba(99,102,241,0.4)] border-2 border-white/10"
-            style={{ fontFamily: "Outfit, sans-serif" }}
+            className="relative w-full h-full rounded-full overflow-hidden
+                       shadow-[0_0_80px_rgba(99,102,241,0.4)] border-2 border-white/10 bg-black/40"
           >
-            {data?.initials || "MA"}
+            <img
+              src="/profile.png"
+              alt="Muhammad Arslan"
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         </motion.div>
 
