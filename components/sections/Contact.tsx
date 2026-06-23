@@ -30,7 +30,7 @@ export default function Contact() {
   };
 
   const contacts = [
-    { icon: Mail,   label: "Email",    value: "arslan@example.com", href: "mailto:arslan@example.com" },
+    { icon: Mail,   label: "Email",    value: "muhammadarslan.cs.web@gmail.com", href: "mailto:arslan@example.com" },
     { icon: Phone,  label: "Phone",    value: "+92 327 5541708", href: "tel:+923275541708" },
     { icon: MapPin, label: "Location", value: "Islamabad, Pakistan" },
   ];
